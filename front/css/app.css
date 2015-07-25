@@ -1,0 +1,26 @@
+#graphicalView {
+    height: 500px;
+    background-color: #ade6fe;
+}
+
+#polledItems {
+    background-color: #a9dba9;
+}
+
+#polleditem-list * {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+#item-list input {
+    margin-top: 1.5em;
+}
+
+#systemitem-list .selected {
+    font-weight: bold;
+    background-color: #5a789d;
+}
+
+ul {
+    list-style-type: none;
+}
