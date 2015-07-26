@@ -1,14 +1,9 @@
 var polledItem = require('../api/polledItem')();
 var request = require('request');
 
-module.exports = function (io) {
+module.exports = function (clients) {
 
   var stuff = {};
-  var socketVar;
-
-  io.on('connection', function (socket) {
-    socketVar = socket;
-  });
 
   stuff.onSchedulerTick = function () {
     polledItem.loadForCheck().then(function (res) {
@@ -25,11 +20,11 @@ module.exports = function (io) {
   };
 
   stuff.checkPolledItems = function (polledItemIds) {
-    socketVar.emit('info', 'checking status.');
+    clients.broadcast('info', 'checking status.');
 
     for (var index in polledItemIds) {
       polledItem.loadById(polledItemIds[index]).then(function (item) {
-        helper(item, socketVar);
+        helper(item);
       });
     }
   };
@@ -44,7 +39,7 @@ module.exports = function (io) {
         status = 'error';
       }
 
-      socketVar.emit('check', {polledItem: polledItemObj._id, status: status});
+      clients.watchingSystem(polledItemObj._system).emit('check', {polledItem: polledItemObj._id, status: status});
 
       var now = new Date();
       var nextCheck = new Date(now.getTime() + polledItemObj.pollingInterval * 60000);

@@ -18,8 +18,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var routes = require('./api/routes')(io);
-var library = require('./lib/checking')(io);
+var clients = require('./lib/clients')(io);
+
+var routes = require('./api/routes')(clients);
+var library = require('./lib/checking')(clients);
 var auth = require('./lib/auth')().init();
 
 auth.flow(app);

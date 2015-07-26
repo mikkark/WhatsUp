@@ -1,15 +1,10 @@
 var apiRouter = require('express').Router();
 
-module.exports = function(io) {
+module.exports = function(clients) {
 
-  var library = require('../lib/checking')(io);
+  var library = require('../lib/checking')(clients);
+
   var routerObj = {};
-
-  var socketVar;
-
-  io.on('connection', function (socket) {
-    socketVar = socket;
-  });
 
   routerObj.apiRoutes = function (options) {
     var polledItem = require('./polledItem')();
@@ -38,7 +33,7 @@ module.exports = function(io) {
     apiRouter.post('/checkNow', function (req, res, next) {
       var polledItemIds = req.body.ids;
 
-      library.checkPolledItems(polledItemIds, socketVar);
+      library.checkPolledItems(polledItemIds);
 
       res.end(JSON.stringify({message: 'POST to check now'}));
     });

@@ -53,22 +53,15 @@ var PolledItemStore = assign({}, EventEmitter.prototype, {
     this.emit(CHANGE_EVENT);
   },
 
-  /**
-   * @param {function} callback
-   */
   addChangeListener: function (callback) {
     this.on(CHANGE_EVENT, callback);
   },
 
-  /**
-   * @param {function} callback
-   */
   removeChangeListener: function (callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }
 });
 
-// Register callback to handle all updates
 AppDispatcher.register(function (action) {
 
   switch (action.actionType) {
@@ -95,13 +88,7 @@ AppDispatcher.register(function (action) {
         return _polledItems[key]._id;
       });
 
-      reqwest({
-        url: '/checkNow',
-        method: 'post',
-        data: {ids},
-        success: function (resp) {
-          console.log('hihei');
-        }
+      $.post('/checkNow', {ids}, function (res) {
       });
 
       PolledItemStore.emitChange();

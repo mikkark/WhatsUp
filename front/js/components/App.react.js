@@ -1,19 +1,9 @@
-//var Footer = require('./Footer.react');
-//var Header = require('./Header.react');
 var PolledItemSection = require('./PolledItemSection.react');
 var React = require('react');
 var Actions = require('../actions/Actions');
 var MessagesSection = require('./MessagesSection.react');
 var SystemSection = require('./SystemSection.react');
-
-///**
-// * Retrieve the initial state from the store
-// */
-//function getInitialState() {
-//  return {
-//    allPolledItems: PolledItemStore.getInitial()
-//  };
-//}
+var GraphicalView = require('./GraphicalView.react');
 
 var App = React.createClass({
 
@@ -31,9 +21,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="grid grid-pad">
-        <div id="graphicalView" className="col-5-12">
-          filled later
-        </div>
+        <GraphicalView />
         <PolledItemSection />
         <SystemSection />
         <input className="col-1-1" type="button" onClick={this._checkNow} value="Check now" />
