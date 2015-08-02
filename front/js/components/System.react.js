@@ -2,7 +2,7 @@ var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var Actions = require('../Actions/Actions');
 
-var cx = require('react/lib/cx');
+var cx = require('classnames');
 
 var System = React.createClass({
 

@@ -7,9 +7,6 @@ var SystemStore = require('./stores/SystemStore');
 var React = require('react');
 window.React = React;
 
-//PolledItemStore.getInitial();
-//SystemStore.getInitial();
-
 React.render(
 <App />,
   document.getElementById('app')

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var PolledItem = mongoose.model('PolledItem');
+var constants = require('../lib/constants')();
 
 module.exports = function() {
 
@@ -60,8 +61,14 @@ module.exports = function() {
       pollingInterval: reqItem.pollingInterval,
       status: 'ok',
       lastCheckedAt: null,
+      itemType: reqItem.itemType,
       _system: reqItem._system
     });
+
+    if (reqItem.itemType === constants.POLLINGITEMTYPES[1]) {
+      newPolledItem.caller = reqItem.caller;
+      newPolledItem.callee = reqItem.callee;
+    }
 
     newPolledItem.save(function (err, polledItem, numberAffected) {
       if (err) throw err;

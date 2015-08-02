@@ -1,0 +1,3 @@
+[submodule "front/js/components/lib/react-components"]
+	path = front/js/components/lib/react-components
+	url = https://github.com/Khan/react-components.git

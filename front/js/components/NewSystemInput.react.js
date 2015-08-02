@@ -1,8 +1,6 @@
 var React = require('react/addons');
 var ReactPropTypes = React.PropTypes;
 
-var cx = require('react/lib/cx');
-
 var NewSystem = React.createClass({
   propTypes: {
     onSave: ReactPropTypes.func.isRequired

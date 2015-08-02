@@ -3,6 +3,8 @@ var ReactPropTypes = React.PropTypes;
 var Actions = require('../actions/Actions');
 var PolledItemStore = require('../stores/PolledItemStore');
 var PolledItemSvg = require('./PolledItemSvg.react');
+var PolledInterfaceItemSvg = require('./PolledInterfaceItemSvg.react');
+var centers;
 
 var GraphicalView = React.createClass({
 
@@ -14,17 +16,24 @@ var GraphicalView = React.createClass({
     PolledItemStore.removeChangeListener(this._onChange);
   },
 
-  /**
-   * @return {object}
-   */
   render: function () {
-
     var items = [];
+    centers = new Map();
 
     if (this.state && this.state.items && Object.keys(this.state.items).length) {
       var i = 0;
       for (var key in this.state.items) {
-        items.push(<PolledItemSvg key={key} item={this.state.items[key]} nTh={i}/>);
+        if (!this.state.items[key].itemType || this.state.items[key].itemType === 'machine') {
+          items.push(<PolledItemSvg key={key} item={this.state.items[key]} nTh={i} saveCenter={this._saveCenter}/>);
+        }
+        i++;
+      }
+
+      i = 0;
+      for (var key in this.state.items) {
+        if (this.state.items[key].itemType === 'interface') {
+          items.push(<PolledInterfaceItemSvg key={key} item={this.state.items[key]} centers={centers} />);
+        }
         i++;
       }
     }
@@ -36,6 +45,10 @@ var GraphicalView = React.createClass({
         </g>
       </svg>
     );
+  },
+
+  _saveCenter: function (item) {
+    centers.set(item.key, item);
   },
 
   _onChange: function () {

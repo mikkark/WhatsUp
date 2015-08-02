@@ -4,6 +4,7 @@ var Actions = require('../actions/Actions');
 var PolledItem = require('./PolledItem.react');
 var NewPolledItemInput = require('./NewPolledItemInput.react');
 var PolledItemStore = require('../stores/PolledItemStore');
+var NewPolledItemButton = require('./NewPolledItemButton.react');
 
 var PolledItemSection = React.createClass({
 
@@ -22,10 +23,15 @@ var PolledItemSection = React.createClass({
 
     var allItems = this.state;
     var items = [];
+    var machineItems = [];
 
     if (allItems && Object.keys(allItems).length > 0) {
       for (var key in allItems) {
         items.push(<PolledItem key={key} item={allItems[key]} onDelete={ this._onDelete } />);
+
+        if (!allItems[key].itemType || allItems[key].itemType === 'machine') {
+          machineItems.push(allItems[key]);
+        }
       }
     }
 
@@ -33,7 +39,7 @@ var PolledItemSection = React.createClass({
       <section id="polledItems" className="col-7-12">
         <ul className="col-1-1" id="polleditem-list">{items}</ul>
         <div id="addNew">
-          <NewPolledItemInput onSave={ this._onAdd } />
+          <NewPolledItemInput onSave={ this._onAdd } machineItems={machineItems} />
         </div>
       </section>
     );

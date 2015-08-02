@@ -1,8 +1,6 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 
-var cx = require('react/lib/cx');
-
 var PolledItem = React.createClass({
 
   propTypes: {

@@ -22,9 +22,9 @@ var clients = require('./lib/clients')(io);
 
 var routes = require('./api/routes')(clients);
 var library = require('./lib/checking')(clients);
-var auth = require('./lib/auth')().init();
+//var auth = require('./lib/auth')().init();
 
-auth.flow(app);
+//auth.flow(app);
 
 app.use(serveStatic('../front'));
 app.use(routes.apiRoutes());

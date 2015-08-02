@@ -3,7 +3,6 @@ var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/Constants');
 var assign = require('object-assign');
 var Actions = require('../actions/Actions');
-var reqwest = require('reqwest');
 var Q = require('q');
 
 var CHANGE_EVENT = 'change';
@@ -57,7 +56,6 @@ var SystemStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-// Register callback to handle all updates
 SystemStore.dispatchToken = AppDispatcher.register(function (action) {
 
   switch (action.actionType) {
