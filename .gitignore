@@ -1,8 +1,6 @@
 .DS_Store
 .idea
 front/node_modules
-front/js/components/*.react-compiled.js
-front/js/components/*.react-compiled.js.map
 front/js/bundle.js
 server/node_modules
 server/config.json

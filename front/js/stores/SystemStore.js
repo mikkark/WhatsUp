@@ -75,7 +75,7 @@ SystemStore.dispatchToken = AppDispatcher.register(function (action) {
 
       if (status !== 'ok') {
         //we only receive updates for the currently selected system, so we know that one has errors.
-        SystemStore.getSelectedSystemId().then(function (system) {
+        SystemStore.getSelectedSystemId().then(system => {
           _systems[system.id].status = 'error';
 
           SystemStore.emitChange();
