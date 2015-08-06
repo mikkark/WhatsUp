@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var Actions = require('../Actions/Actions');
+var Actions = require('../actions/Actions');
 
 var cx = require('classnames');
 
