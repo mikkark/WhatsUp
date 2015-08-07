@@ -9,11 +9,16 @@ module.exports = function() {
 	polledItem.loadBySystemId = function(req, res, next) {
     var systemId = req.params.systemId;
 
-		PolledItem.find({ _system: systemId }, function (err, results) {
-			if (err) throw err;
-				res.json(results);
-		    res.end();
-    });
+    if (systemId) {
+      PolledItem.find({ _system: systemId }, function (err, results) {
+        if (err) throw err;
+        res.json(results);
+        res.end();
+      });
+    }
+    else {
+      res.end();
+    }
 	};
 
   polledItem.loadForCheck = function () {
