@@ -9,6 +9,7 @@ module.exports = function() {
 	polledItem.loadBySystemId = function(req, res, next) {
     var systemId = req.params.systemId;
 
+    console.log('-'+systemId+'-');
     if (systemId) {
       PolledItem.find({ _system: systemId }, function (err, results) {
         if (err) throw err;
