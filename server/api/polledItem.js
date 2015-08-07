@@ -10,7 +10,7 @@ module.exports = function() {
     var systemId = req.params.systemId;
 
     console.log('-'+systemId+'-');
-    if (systemId) {
+    if (systemId !== null) {
       PolledItem.find({ _system: systemId }, function (err, results) {
         if (err) throw err;
         res.json(results);
